@@ -19,6 +19,7 @@ else:
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
+
 class ResultRepository:
     def __init__(self, db_path: Path | str = DB_PATH):
         self.db_path = str(db_path)
