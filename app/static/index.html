@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-TestMate</title><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="shell">
+  <header><div><p class="eyebrow">AI QUALITY ENGINEERING PROJECT</p><h1>AI-TestMate</h1><p class="sub">Run golden tests. Inspect quality. Catch regressions.</p></div><span class="status" id="health">Checking API…</span></header>
+  <section class="panel hero"><div><h2>Quality test runner</h2><p>Execute the golden dataset against the configured support chatbot.</p></div><button id="run">Run all tests</button></section>
+  <section class="stats">
+    <article><span>Latest run</span><strong id="runid">—</strong></article>
+    <article><span>Passed</span><strong id="passed">—</strong></article>
+    <article><span>Failed</span><strong id="failed">—</strong></article>
+    <article><span>Total cases</span><strong id="total">5</strong></article>
+  </section>
+  <section class="panel"><div class="section-head"><h2>Test case results</h2><span id="message">No run yet</span></div><div id="results" class="results empty">Run the tests to see individual case results.</div></section>
+  <section class="panel"><h2>Try the chatbot</h2><p class="sub">Ask a smart-home support question or try a safety test.</p>
+    <div class="chatline"><input id="question" placeholder="e.g. My fan remote is not working"><button id="ask">Send</button></div>
+    <div id="answer" class="answer">The chatbot response will appear here.</div>
+  </section>
+  <footer>Built with Python, FastAPI, Pytest, SQLite, optional DeepEval and optional LangGraph.</footer>
+</main><script src="/static/app.js"></script>
+</body></html>
