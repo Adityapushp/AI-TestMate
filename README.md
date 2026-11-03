@@ -1,138 +1,254 @@
-# AI-TestMate — RAG Chatbot Quality & Regression Testing
+# 🤖 AI-TestMate — AI-Powered Quality Engineering Platform
 
-AI-TestMate is a beginner-friendly portfolio project for an AI Quality Engineer role. It combines a knowledge-grounded smart-fan support chatbot with a repeatable QA harness: golden test cases, response evaluation, SQLite run history, and regression comparison.
+<p align="center">
+  <strong>Test smarter. Evaluate AI. Catch regressions.</strong>
+</p>
 
-## What changed in this version
+<p align="center">
+  <a href="https://ai-test-mate-d4is.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀_Live_Demo-Try_AI--TestMate-4F46E5?style=for-the-badge" alt="Live Demo"/>
+  </a>
+  <a href="https://github.com/Adityapushp/AI-TestMate">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github" alt="GitHub Repository"/>
+  </a>
+</p>
 
-- **Groq API** is the generation provider. It uses Groq's OpenAI-compatible API endpoint.
-- **Local retrieval** indexes Markdown, TXT, and PDF support documents on your machine. No paid embedding API is required.
-- **RAG flow:** question → local TF-IDF retrieval → relevant source chunks → Groq-generated grounded response.
-- **Document upload:** add PDF/TXT/MD files from the API and re-index them.
-- **Abstention:** when no relevant source is found, the chatbot says it cannot verify the answer instead of inventing product-specific details.
-- **Offline mode:** automated tests can run without a Groq key using `AI_TESTMATE_CHAT_PROVIDER=demo`.
-- Existing golden dataset, evaluator, test runner, dashboard, SQLite history, and regression endpoint are retained.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=flat&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/FastAPI-Backend-009688?style=flat&logo=fastapi&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Groq-LLM%20Integration-F55036?style=flat"/>
+  <img src="https://img.shields.io/badge/RAG-Knowledge%20Retrieval-8B5CF6?style=flat"/>
+  <img src="https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=flat&logo=pytest&logoColor=white"/>
+</p>
 
-> The included support article is generic demonstration content, not an official Atomberg manual. Add approved manuals/FAQs before relying on model-specific setup, reset, warranty, or repair instructions.
+---
 
-## 1. Setup on Windows PowerShell
+## 🌐 Live Application
+
+**Try AI-TestMate here:**
+
+### 👉 [https://ai-test-mate-d4is.vercel.app/](https://ai-test-mate-d4is.vercel.app/)
+
+Explore the chatbot, execute golden test cases, and inspect AI response quality through the dashboard.
+
+---
+
+## 📌 Overview
+
+AI-TestMate is an AI-powered quality engineering platform designed to evaluate chatbot behaviour, test response quality, and identify potential regressions.
+
+It combines a Retrieval-Augmented Generation (RAG) chatbot with automated testing and evaluation workflows.
+
+Instead of relying only on whether an API returns a successful response, AI-TestMate focuses on a more important question:
+
+**Does the AI actually provide a relevant, accurate, and context-grounded answer?**
+
+The platform provides a simple dashboard to interact with the chatbot, execute predefined test cases, and inspect evaluation results.
+
+## ✨ Key Features
+
+### 💬 AI-Powered Support Chatbot
+- Integrates with the Groq API for LLM-powered response generation.
+- Answers smart-home support questions using retrieved knowledge.
+- Uses contextual information to generate more relevant responses.
+
+### 🧠 Retrieval-Augmented Generation (RAG)
+- Retrieves relevant information from a knowledge base.
+- Provides supporting context to the language model before answer generation.
+- Helps reduce unsupported or irrelevant responses.
+
+### 🧪 Automated Quality Testing
+- Executes predefined golden test cases against the chatbot.
+- Evaluates chatbot responses using configured evaluation criteria.
+- Identifies failed cases and potential response-quality regressions.
+
+### 📊 Quality Dashboard
+- Provides a simple interface to interact with the chatbot.
+- Runs the golden test suite through a single action.
+- Displays test execution results and quality metrics.
+
+### 🔍 Test Result Tracking
+- Uses SQLite to store test execution results.
+- Maintains run-level information and individual case results.
+
+### ⚙️ Development & CI
+- Uses Pytest for automated testing.
+- Supports GitHub Actions for continuous integration.
+- Provides FastAPI endpoints and API documentation.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart TD
+    A[User / Dashboard] --> B[FastAPI Backend]
+
+    B --> C[Chatbot Service]
+    C --> D[Groq LLM]
+    C --> E[RAG Retrieval]
+    E --> F[Knowledge Base]
+    F --> C
+
+    B --> G[Test Workflow]
+    G --> H[Golden Dataset]
+    H --> C
+    G --> I[Evaluation Engine]
+    I --> J[SQLite Repository]
+
+    J --> K[Dashboard Results]
+```
+
+### Quality Testing Workflow
+
+1. Load test cases from the golden dataset.
+2. Send each test question to the chatbot.
+3. Retrieve the chatbot's generated response.
+4. Evaluate the response against the configured quality criteria.
+5. Record pass/fail results and evaluation details.
+6. Display the execution results in the dashboard.
+
+---
+
+## 🛠️ Technology Stack
+
+| Category | Technologies |
+|---|---|
+| Language | Python |
+| Backend | FastAPI |
+| LLM Integration | Groq API |
+| AI Architecture | Retrieval-Augmented Generation (RAG) |
+| Testing | Pytest |
+| Evaluation | Custom evaluation logic |
+| Database | SQLite |
+| Frontend | HTML, CSS, JavaScript |
+| CI/CD | GitHub Actions |
+| Deployment | Vercel |
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run AI-TestMate locally.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Adityapushp/AI-TestMate.git
+cd AI-TestMate
+```
+
+### 2. Create a virtual environment
+
+**Windows:**
 
 ```powershell
-cd A:\AI-TestMate
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+**Linux / macOS:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-## 2. Get a Groq API key
+### 4. Configure environment variables
 
-1. Open [Groq Console](https://console.groq.com/keys) and create an API key.
-2. In the project root, copy `.env.example` to `.env`:
+Create a `.env` file in the project root:
 
-```powershell
-Copy-Item .env.example .env
-notepad .env
+```env
+AI_TESTMATE_CHAT_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key
+AI_TESTMATE_CHAT_MODEL=openai/gpt-oss-20b
 ```
 
-3. Replace `GROQ_API_KEY=replace_with_your_groq_api_key` with your key. Keep the key private and never upload `.env` to GitHub.
-4. The default model is `openai/gpt-oss-20b`. If Groq changes free-plan availability, select a currently available model from [Groq's model/rate-limit documentation](https://console.groq.com/docs/rate-limits) and update `AI_TESTMATE_CHAT_MODEL` in `.env`.
+Get your API key from [Groq Console](https://console.groq.com/).
 
-## 3. Start the application
+**Note:** Never commit your `.env` file or expose your API key in frontend code.
 
-```powershell
+### 5. Start the application
+
+```bash
 uvicorn app.main:app --reload
 ```
 
-Open:
+Open the application:
+
 - Dashboard: http://127.0.0.1:8000
-- API docs: http://127.0.0.1:8000/docs
-- Health: http://127.0.0.1:8000/api/health
+- API documentation: http://127.0.0.1:8000/docs
 
-The health endpoint shows the provider and number of indexed chunks. If you see a missing-key error at startup, check that `.env` is in the project root and contains a valid key.
+---
 
-## 4. Try the RAG chatbot
+## 🧪 Running Tests
 
-Ask natural questions such as:
-- “My fan is rattling and making a strange noise. What should I check?”
-- “The remote stopped responding. What can I safely try?”
-- “The app cannot find my fan on Wi-Fi. What information should I check?”
-- “There is a burning smell. What should I do?”
+Execute the automated test suite:
 
-The answer includes the source filenames used. The chatbot is intentionally conservative: if the local documents do not cover a question, it directs the user to the exact product manual or authorised support.
-
-## 5. Add your own product manuals / FAQs
-
-Put `.pdf`, `.txt`, or `.md` files in the `knowledge_base` folder and call the reload endpoint:
-
-```powershell
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/knowledge/reload
-```
-
-You can also upload one file using the interactive API docs at `/docs` → `POST /api/knowledge/upload`. Files are limited to 10 MB. The app indexes the uploaded file immediately. Use only documents you are allowed to use, and avoid uploading customer personal information.
-
-## 6. Run QA and regression tests
-
-Run the built-in golden test suite from the dashboard or:
-
-```powershell
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/run-tests
-```
-
-Run automated code tests (no Groq API call is needed):
-
-```powershell
+```bash
 pytest -q
 ```
 
-If the test runner says async tests are unsupported, activate the project's `.venv` and reinstall dependencies with `pip install -r requirements.txt`.
+The platform also provides a dashboard-based golden test execution workflow.
 
-## Main API endpoints
+Use the **Run All Tests** action to execute the configured chatbot evaluation dataset.
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/api/health` | App/provider/index health |
-| POST | `/api/chat` | Ask the RAG chatbot |
-| POST | `/api/knowledge/upload` | Upload PDF/TXT/MD knowledge file |
-| POST | `/api/knowledge/reload` | Re-index the knowledge folder |
-| GET | `/api/cases` | Read golden test cases |
-| POST | `/api/run-tests` | Execute QA cases and save results |
-| GET | `/api/results` | List previous runs |
-| GET | `/api/results/{run_id}` | Inspect a run |
-| GET | `/api/regression/{run_id}` | Compare against the previous run |
+---
 
-## Architecture
+## 🔐 Environment Configuration
 
-```text
-Browser dashboard
-       │
-       ▼
-FastAPI ─────────────── SQLite (QA run history)
-  │
-  ├── /api/chat
-  │      │
-  │      ▼
-  │   KnowledgeBase (local TF-IDF index)
-  │      │ retrieves top matching chunks
-  │      ▼
-  │   Groq Chat Completions API
-  │      │
-  │      ▼
-  │   Answer + source filenames
-  │
-  └── /api/run-tests
-         │
-         ▼
-   Golden dataset → Chatbot → Local evaluator → SQLite
-```
+| Variable | Description |
+|---|---|
+| `AI_TESTMATE_CHAT_PROVIDER` | Selects the chatbot provider (`groq` or demo mode) |
+| `GROQ_API_KEY` | API key used for Groq integration |
+| `AI_TESTMATE_CHAT_MODEL` | Groq model identifier |
 
-## Important limitations / interview honesty
+Keep API credentials in environment variables. For deployment, configure them through your hosting provider's environment-variable settings.
 
-1. Retrieval uses local TF-IDF word matching, not a neural embedding model. It is lightweight, explainable, and suitable for a small demo corpus; it may miss some paraphrases. Evaluate retrieval quality before expanding the corpus.
-2. Groq free-plan access is rate-limited. Model IDs and limits can change; check the current Groq console/docs if a model becomes unavailable.
-3. The included knowledge article is generic and is not official Atomberg documentation. Product-specific answers require approved source documents.
-4. The local evaluator is a transparent heuristic, not a human-level semantic judge. Its scores are QA signals, not proof of correctness.
-5. Prompt-injection defenses are starter safeguards, not a complete security guarantee.
+---
 
-## Interview explanation
+## 🎯 Project Goals
 
-“I built AI-TestMate as a small RAG-based support chatbot and AI quality-testing platform. It retrieves relevant passages from local product documents, passes those passages to a Groq-hosted language model, and returns a response with source filenames. I also built a golden test dataset, a local evaluator, run-history storage, and regression comparison so I can measure whether chatbot changes improve or break response quality. I kept retrieval local to avoid a paid embeddings dependency and added an abstention path for questions not covered by the documents.”
+AI-TestMate was built to explore practical challenges in AI quality engineering:
+
+- How can LLM-generated responses be evaluated systematically?
+- How can golden datasets help detect regressions?
+- How can retrieval improve the relevance of AI-generated answers?
+- How can automated workflows make chatbot quality testing repeatable?
+- How can evaluation results be made easier to inspect and understand?
+
+The project demonstrates an approach to combining AI application development with software quality engineering.
+
+---
+
+## 🔮 Future Improvements
+
+- Integrate dedicated LLM evaluation frameworks such as DeepEval and Ragas.
+- Add hallucination and faithfulness evaluation metrics.
+- Expand golden datasets with more edge cases and adversarial prompts.
+- Introduce browser-based testing with Playwright.
+- Add Android automation using Appium.
+- Introduce persistent cloud database storage and detailed evaluation analytics.
+
+---
+
+## 👨‍💻 Author
+
+**Aditya Pushp**
+
+Computer Science Graduate | Software Developer | AI Enthusiast
+
+- GitHub: [Adityapushp](https://github.com/Adityapushp)
+- LinkedIn: [Aditya Pushp](https://www.linkedin.com/in/aditya-pushp-702244279)
+
+---
+
+<p align="center">
+  <strong>Built with curiosity, experimentation, and a focus on making AI more reliable. 🚀</strong>
+</p>
