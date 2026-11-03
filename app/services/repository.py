@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 
 DB_PATH = Path(__file__).resolve().parents[1] / "testmate.db"
 
+
 class ResultRepository:
     def __init__(self, db_path: Path | str = DB_PATH):
         self.db_path = str(db_path)
